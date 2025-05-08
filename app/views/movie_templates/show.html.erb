@@ -112,11 +112,7 @@
     Director
   </dt>
   <dd>
-    <% the_id = @the_movie.director_id %>
-
-    <% matching_directors = Director.where({ :id => the_id }) %>
-        
-    <% the_director = matching_directors.at(0) %>
+    <% the_director = @the_movie.director %>
 
     <% if the_director != nil %>
       <%= the_director.name %>
@@ -139,5 +135,31 @@
     <%= time_ago_in_words(@the_movie.updated_at) %> ago
   </dd>
 </dl>
+
+<dt>
+  Character
+</dt>
+<table border="1">
+  <tr>
+    <th>
+      ID
+    </th>
+    <th>
+      Name
+    </th>
+  </tr>
+  <% @the_movie.characters.order(:name).each do |a_character| %>  
+
+      <tr>
+        <th>
+          <%= a_character.id %>
+        </th>
+
+        <th>
+          <%= a_character.name %>
+        </th>
+      </tr>
+  <% end %>
+</table>
 
 <hr>
